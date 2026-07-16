@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ---- Type ---- */
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-sans: "Manrope", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Menlo", monospace;
+
+  /* ---- Ink (dark) palette — desk-lamp-at-night ---- */
+  --color-ink-950: #0f0f12;
+  --color-ink-900: #16161a;
+  --color-ink-800: #1e1e24;
+  --color-ink-700: #2a2a32;
+  --color-ink-600: #3a3a44;
+  --color-ink-500: #55555f;
+  --color-ink-400: #7a7a85;
+  --color-ink-300: #a3a3ac;
+  --color-ink-200: #c9c9d1;
+  --color-ink-100: #e8e8ec;
+  --color-ink-50: #f5f5f2;
+
+  /* ---- Paper (light) palette ---- */
+  --color-paper-50: #fdfcf9;
+  --color-paper-100: #f7f5ef;
+  --color-paper-200: #efece2;
+  --color-paper-300: #e2ddce;
+
+  /* ---- Amber glow (primary accent — the lamp) ---- */
+  --color-amber-50: #fff8e8;
+  --color-amber-100: #ffedc2;
+  --color-amber-300: #f9cf6b;
+  --color-amber-400: #f5b841;
+  --color-amber-500: #eea62c;
+  --color-amber-600: #d4881a;
+  --color-amber-700: #a3660f;
+
+  /* ---- Focus violet (secondary accent) ---- */
+  --color-violet-300: #b3b8ff;
+  --color-violet-400: #7c86ff;
+  --color-violet-500: #5b64f0;
+  --color-violet-600: #454ecf;
+
+  /* ---- Signal colors ---- */
+  --color-mint-400: #4fd1a5;
+  --color-mint-500: #2fb989;
+  --color-coral-400: #ff8577;
+  --color-coral-500: #f2604f;
+
+  --radius-card: 1.1rem;
+  --shadow-glow: 0 0 40px -8px rgba(245, 184, 65, 0.35);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-amber-300);
+    color: var(--color-ink-950);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-amber-400);
+    outline-offset: 2px;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ink-600) transparent;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  .glow-ring {
+    box-shadow: var(--shadow-glow);
+  }
+  .glass {
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+.animate-flicker {
+  animation: flicker 3s ease-in-out infinite;
+}
+
+@keyframes ring-progress {
+  from { stroke-dashoffset: var(--ring-from, 283); }
+  to { stroke-dashoffset: var(--ring-to, 0); }
+}
